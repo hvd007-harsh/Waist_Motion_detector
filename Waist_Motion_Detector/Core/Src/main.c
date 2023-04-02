@@ -68,7 +68,9 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void UART1_SendString(char *s){
+	HAL_UART_Transmit(&huart1, (uint8_t *)s, strlen(s) , 1000);
+}
 /* USER CODE END 0 */
 
 /**
@@ -167,10 +169,10 @@ int main(void)
 	  MPU6050_GetGyroscopeScaled(&gx, &gy, &gz);
 	 // Here we are getting the acceleration and gyro parameter
 
+
+	  sprintf((char*)buffer, "ACC: X: %0.2f Y: %0.2f Z: %0.2f \n\r GYR: X:%0.2f Y: %0.2f Z:%0.2f \n\r",ax,ay,az,gx,gy,gz); // @suppress("Float formatting support")
 	  memset(buffer,0,128);
-
-	  sprintf((char*)buffer, "ACC: X: %0.2f Y: %0.2f Z: %0.2f \n\r GYR: X:%0.2f Y: %0.2f Z:%0.2f \n\r",ax,ay,az,gx,gy,gz);
-
+	  UART1_SendString((char*)buffer);
 	  /*
 	   * Better option is that we take the roll and pitch of the movement and if
 	   * we get any kind of roll or pitch then we can say object is in movement
@@ -185,17 +187,17 @@ int main(void)
 
 	  if(roll >0  || pitch > 0 ){
 		  sprintf((char*)buffer,"The body is moving Person is in walking position");
-		  sprintf("The body is moving person is in standing position");
+		  printf("The body is moving person is in standing position");
 
 	  }
      if(ax > 0 && ay>0 ){ //Here we can check the position with movement
     	 sprintf((char*)buffer,"person is in standing position");
-    	 sprintf("person is in standing position");
+    	 printf("person is in standing position");
      }
 
      if(ax ==0 && az == 0 && ay ==0){ //Here we are checking that person is in still position
     	 sprintf((char*)buffer,"Person is not moving might be in seat position");
-    	 sprintf("Person is not moving might be in seat position");
+    	 printf("Person is not moving might be in seat position");
      }
      /*
       * Further we will move for the angle of the user by using arc tangent
@@ -204,8 +206,11 @@ int main(void)
       * upward
       *
       */
+     memset(buffer,0 ,128);
+      UART1_SendString((char*)buffer);
 
-      // UART2_SendString((char*)buffer);
+
+      HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -401,6 +406,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	  printf("Error Occured at some part of HAL_ERROR Handler");
   }
   /* USER CODE END Error_Handler_Debug */
 }

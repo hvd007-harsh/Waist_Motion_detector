@@ -1,25 +1,7 @@
-21:08:31 **** Incremental Build of configuration Debug for project Waist_Motion_Detector ****
+09:33:02 **** Incremental Build of configuration Debug for project Waist_Motion_Detector ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'SystemClock_Config':
-../Core/Src/main.c:198:5: warning: implicit declaration of function 'Error_Handler' [-Wimplicit-function-declaration]
-  198 |     Error_Handler();
-      |     ^~~~~~~~~~~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:354:6: warning: conflicting types for 'Error_Handler'
-  354 | void Error_Handler(void)
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c:198:5: note: previous implicit declaration of 'Error_Handler' was here
-  198 |     Error_Handler();
-      |     ^~~~~~~~~~~~~
-arm-none-eabi-gcc -o "Waist_Motion_Detector.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\EMBEDDED\Embedded Internship Task\Waist_Motion_Detector\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Waist_Motion_Detector.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Waist_Motion_Detector.elf
- 
 arm-none-eabi-size   Waist_Motion_Detector.elf 
-arm-none-eabi-objdump -h -S  Waist_Motion_Detector.elf  > "Waist_Motion_Detector.list"
    text	   data	    bss	    dec	    hex	filename
-  25296	    120	   1976	  27392	   6b00	Waist_Motion_Detector.elf
+  32904	    120	   1984	  35008	   88c0	Waist_Motion_Detector.elf
 Finished building: default.size.stdout
- 
-Finished building: Waist_Motion_Detector.list
  
